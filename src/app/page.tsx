@@ -1,7 +1,103 @@
+import Image from 'next/image';
+import { use } from 'react';
+import { getData } from '@/lib/datocms/get_data';
+import { HOMEPAGE_QUERY } from '@/queries/homepage_query';
+import { IHomePageRoot } from '@/models/homepage';
+import PortfolioAccordion from '@/components/PortfolioAccordion';
+import TechBrand from '@/components/TechBrand';
+import HomePageBlogArticle from '@/components/HomePageBlogArticle';
+
 export default function Home() {
+  const myInfo: IHomePageRoot = use(getData(HOMEPAGE_QUERY));
   return (
-    <main>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+    <main className="w-full">
+      {/* Hero */}
+      <section className="mx-2 max-w-screen-lg md:mx-auto">
+        <div className=" flex flex-col items-center justify-center">
+          <Image
+            className="mr-2 h-[174px] rounded-full border-2 border-zinc-500 bg-zinc-600"
+            src={myInfo.data.myinfo.photo.url}
+            width={174}
+            height={174}
+            alt="Minha foto"
+          />
+          <div className="flex flex-col items-center text-center">
+            <span className="flex flex-col font-serif text-4xl font-medium text-zinc-800">
+              <span>Olá!</span>
+              <span>Meu nome é</span>
+              <span className="font-sans font-bold text-zinc-900">Nicolas</span>
+            </span>
+            <span className="my-2 w-max rounded-md bg-zinc-800 p-2 text-2xl font-medium text-zinc-300 shadow-inner shadow-zinc-600">
+              Desenvolvedor{' '}
+              <span className="font-bold text-zinc-50">
+                {myInfo.data.myinfo.role}
+              </span>
+            </span>
+            <p className="max-w-[500px] font-serif text-base font-medium text-zinc-900">
+              "Formado em Análise e Desenvolvimento de Sistemas, estudo
+              programação web criando projetos a dois anos"
+            </p>
+
+            {/* Mídias Sociais */}
+            <div className="mt-3 flex">
+              {myInfo.data.allSocialMds.map((social_media) => {
+                return (
+                  <a
+                    href={social_media.link}
+                    target="_blank"
+                    className="mx-2 rounded-md bg-zinc-800 p-1 shadow-sm shadow-zinc-500 duration-300 hover:scale-110 hover:bg-zinc-900"
+                    key={social_media.id}
+                  >
+                    <Image
+                      src={social_media.logo.url}
+                      width={30}
+                      height={30}
+                      alt="Logo da mídia social"
+                    />
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Tech Stack */}
+      <section className="mx-2 my-10 grid max-w-screen-lg grid-flow-col place-items-center gap-2 rounded-md bg-zinc-800 p-2 shadow-md shadow-black md:mx-auto">
+        <TechBrand techs={myInfo.data.allTechnologies} />
+      </section>
+
+      {/* Portfolio e Blog */}
+      <section className="align-start mx-2 grid max-w-screen-lg grid-cols-6 gap-4 md:mx-auto md:grid-cols-12">
+        <div className="col-span-full flex flex-col self-start rounded-md border border-black py-4 px-4 shadow-md shadow-zinc-800 md:col-start-1 md:col-end-7">
+          <h1 className="w-full text-center text-2xl font-bold text-zinc-800">
+            Portifólio
+          </h1>
+          <p className="w-full text-center font-serif font-medium">
+            "Alguns projetos que desenvolvi durante os últimos anos."
+          </p>
+          <ul className="list-none">
+            {myInfo.data.allRepositories.map((repository) => {
+              return (
+                <PortfolioAccordion key={repository.id} repo={repository} />
+              );
+            })}
+          </ul>
+        </div>
+        <div className="col-span-full flex max-h-max flex-col self-start rounded-md border border-black py-4 px-4 shadow-md shadow-zinc-800  md:col-start-7 md:col-end-13">
+          <h1 className="w-full text-center text-2xl font-bold text-zinc-800">
+            Blog
+          </h1>
+          <p className="w-full text-center font-serif font-medium">
+            "Algumas dicas e discussões sobre programação web moderna."
+          </p>
+          <ul className="flex h-full list-none flex-col justify-between">
+            {myInfo.data.allPosts.map((post) => {
+              return <HomePageBlogArticle key={post.id} post={post} />;
+            })}
+          </ul>
+        </div>
+      </section>
     </main>
   );
 }
