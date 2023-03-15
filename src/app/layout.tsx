@@ -31,7 +31,7 @@ export default function RootLayout({
 }) {
   return (
     <html
-      lang="en"
+      lang="pt-BR"
       className={`${pf_display.variable} ${roboto_flex.variable}`}
     >
       <body>

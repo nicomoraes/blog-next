@@ -3,11 +3,11 @@ import React from 'react';
 import { formatDate } from '@/lib/formatDate';
 import { Post } from '@/models/post';
 
-interface IHomePageBlogArticleProps {
+interface IHomePagePostArticleProps {
   post: Post;
 }
 
-const HomePagePostArticle: React.FC<IHomePageBlogArticleProps> = ({
+const HomePagePostArticle: React.FC<IHomePagePostArticleProps> = ({
   post: { title, _createdAt, slug, tag },
 }) => {
   return (
@@ -18,7 +18,7 @@ const HomePagePostArticle: React.FC<IHomePageBlogArticleProps> = ({
           {formatDate(_createdAt)}
         </span>
       </div>
-      <Link href={`/posts/${slug}`}>
+      <Link href={`/blog/posts/${slug}`}>
         <h2 className="mt-2 cursor-pointer text-xl font-medium hover:underline">
           {title}
         </h2>

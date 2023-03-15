@@ -1,8 +1,8 @@
-import { Myinfo } from "./my_Info";
-import { Post } from "./post";
-import { Repository } from "./repository";
-import { SocialMedia } from "./social_media";
-import { Technology } from "./technology";
+import { Myinfo } from "../my_Info";
+import { Post } from "../post";
+import { Repository } from "../repository";
+import { SocialMedia } from "../social_media";
+import { Technology } from "../technology";
 
 export interface IHomePageQuery {
   data: Data;

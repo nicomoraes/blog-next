@@ -2,10 +2,12 @@ import Image from 'next/image';
 import { use } from 'react';
 import { getData } from '@/lib/datocms/get_data';
 import { HOMEPAGE_QUERY } from '@/queries/homepage_query';
-import { IHomePageQuery } from '@/models/home_page';
+import { IHomePageQuery } from '@/models/pages/home_page';
 import PortfolioAccordion from '@/components/PortfolioAccordion';
 import TechBrand from '@/components/TechBrand';
 import HomePagePostArticle from '@/components/HomePagePostArticle';
+import { METADATA_QUERY } from '@/queries/metadata_query';
+import { IMetadata } from '@/models/metadata';
 
 export default function Home() {
   const myInfo: IHomePageQuery = use(getData(HOMEPAGE_QUERY));
@@ -73,7 +75,9 @@ export default function Home() {
             Portfólio
           </h1>
           <p className="w-full text-center font-serif font-medium">
-            "Alguns projetos que desenvolvi durante os últimos anos."
+            "Alguns projetos que desenvolvi durante os últimos anos visando o
+            aprendizado e aprimoramento sobre novas e modernas tecnologias de
+            prograação web."
           </p>
           <ul className="list-none">
             {myInfo.data.allRepositories.map((repository) => {
@@ -99,4 +103,36 @@ export default function Home() {
       </section>
     </main>
   );
+}
+
+export async function generateMetadata() {
+  const post: IMetadata = await getData(METADATA_QUERY('home'));
+
+  const {
+    data: {
+      websiteInfo: {
+        metatags: { description, image, title },
+      },
+    },
+  } = post;
+
+  return {
+    title: title,
+    description: description,
+    openGraph: {
+      title: title,
+      description: description,
+      url: `https://nicolasmoraes.vercel.app/blog`,
+      siteName: 'Nicolas Moraes',
+      images: [
+        {
+          url: image.url,
+          width: 800,
+          height: 600,
+        },
+      ],
+      locale: 'pt-BR',
+      type: 'website',
+    },
+  };
 }

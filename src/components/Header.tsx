@@ -49,8 +49,8 @@ const Header: React.FC = () => {
       {isMenuOpen && (
         <nav className="w-full bg-zinc-200 px-4">
           <HeaderLink href={'/'} label={'Início'} />
-          <HeaderLink href={'/'} label={'Blog'} />
-          <HeaderLink href={'/'} label={'Contato'} />
+          <HeaderLink href={'/blog'} label={'Blog'} />
+          <HeaderLink href={'/contato'} label={'Contato'} />
         </nav>
       )}
     </header>
