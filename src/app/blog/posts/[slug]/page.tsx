@@ -50,7 +50,7 @@ const Posts: NextPage<IPostPageProps> = ({ params }) => {
               children={body}
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw, rehypeHighlight]}
-              className="pre-code:bg-transparent prose prose-zinc md:prose-lg prose-pre:shadow-sm prose-pre:shadow-zinc-800 "
+              className="prose prose-zinc md:prose-lg  prose-pre:bg-[#0d1117] prose-pre:shadow-sm prose-pre:shadow-zinc-800 "
             />
           )}
         </div>
