@@ -2,13 +2,13 @@ import Image from 'next/image';
 import { use } from 'react';
 import { getData } from '@/lib/datocms/get_data';
 import { HOMEPAGE_QUERY } from '@/queries/homepage_query';
-import { IHomePageRoot } from '@/models/homepage';
+import { IHomePageQuery } from '@/models/home_page';
 import PortfolioAccordion from '@/components/PortfolioAccordion';
 import TechBrand from '@/components/TechBrand';
-import HomePageBlogArticle from '@/components/HomePageBlogArticle';
+import HomePagePostArticle from '@/components/HomePagePostArticle';
 
 export default function Home() {
-  const myInfo: IHomePageRoot = use(getData(HOMEPAGE_QUERY));
+  const myInfo: IHomePageQuery = use(getData(HOMEPAGE_QUERY));
   return (
     <main className="w-full">
       {/* Hero */}
@@ -34,8 +34,7 @@ export default function Home() {
               </span>
             </span>
             <p className="max-w-[500px] font-serif text-base font-medium text-zinc-900">
-              "Formado em Análise e Desenvolvimento de Sistemas, estudo
-              programação web criando projetos a dois anos"
+              {myInfo.data.myinfo.phrase}
             </p>
 
             {/* Mídias Sociais */}
@@ -68,10 +67,10 @@ export default function Home() {
       </section>
 
       {/* Portfolio e Blog */}
-      <section className="align-start mx-2 grid max-w-screen-lg grid-cols-6 gap-4 md:mx-auto md:grid-cols-12">
+      <section className="align-start mx-2 my-4 grid max-w-screen-lg grid-cols-6 gap-4 md:mx-auto md:grid-cols-12">
         <div className="col-span-full flex flex-col self-start rounded-md border border-black py-4 px-4 shadow-md shadow-zinc-800 md:col-start-1 md:col-end-7">
           <h1 className="w-full text-center text-2xl font-bold text-zinc-800">
-            Portifólio
+            Portfólio
           </h1>
           <p className="w-full text-center font-serif font-medium">
             "Alguns projetos que desenvolvi durante os últimos anos."
@@ -93,7 +92,7 @@ export default function Home() {
           </p>
           <ul className="flex h-full list-none flex-col justify-between">
             {myInfo.data.allPosts.map((post) => {
-              return <HomePageBlogArticle key={post.id} post={post} />;
+              return <HomePagePostArticle key={post.id} post={post} />;
             })}
           </ul>
         </div>

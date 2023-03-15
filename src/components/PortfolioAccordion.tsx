@@ -3,10 +3,10 @@ import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { BiLinkExternal } from 'react-icons/bi';
-import { AllRepository } from '@/models/homepage';
+import { Repository } from '@/models/repository';
 
 interface IPortfolioAccordionProps {
-  repo: AllRepository;
+  repo: Repository;
 }
 
 const PortfolioAccordion: React.FC<IPortfolioAccordionProps> = ({
@@ -59,9 +59,12 @@ const PortfolioAccordion: React.FC<IPortfolioAccordionProps> = ({
               ))}
             </div>
             {link != '' && (
-              <button className="flex h-9 items-center justify-center rounded-full bg-zinc-50 py-2 px-4 font-sans font-bold text-zinc-900 shadow-zinc-500 duration-300 hover:bg-zinc-200 hover:shadow-md max-md:mt-4 md:ml-auto">
+              <a
+                href={link}
+                className="flex h-9 items-center justify-center rounded-full bg-zinc-50 py-2 px-4 font-sans font-bold text-zinc-900 shadow-zinc-500 duration-300 hover:bg-zinc-200 hover:shadow-md max-md:mt-4 md:ml-auto"
+              >
                 Acessar <BiLinkExternal size={20} className="ml-1" />
-              </button>
+              </a>
             )}
           </div>
         </motion.div>

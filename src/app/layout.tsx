@@ -5,7 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export const metadata = {
-  title: "Nico's Blog",
+  title: 'Página inicial',
   description: 'Portfolio Website',
   icons: {
     icon: '/favicon.png',

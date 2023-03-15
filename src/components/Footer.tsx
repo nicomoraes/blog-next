@@ -6,17 +6,6 @@ const Footer: React.FC = () => {
   return (
     <footer className="w-full bg-zinc-800 py-4">
       <div className="mx-auto max-w-screen-lg">
-        <div className="flex w-full items-center justify-center">
-          <Image
-            src="/logo.svg"
-            width={30}
-            height={30}
-            alt={'Logo do website'}
-          />
-          <span className="ml-2 font-serif font-medium text-zinc-50">
-            Nicolas Moraes
-          </span>
-        </div>
         <div className="flex min-w-max px-4 max-sm:items-center max-sm:justify-center">
           <ul className="mr-auto text-zinc-50">
             <h3 className="mb-2 text-lg font-bold">Páginas</h3>
@@ -26,12 +15,12 @@ const Footer: React.FC = () => {
               </Link>
             </li>
             <li className="my-2">
-              <Link href={'/'} className="hover:text-zinc-500">
+              <Link href={'/blog'} className="hover:text-zinc-500">
                 Blog
               </Link>
             </li>
             <li>
-              <Link href={'/'} className="hover:text-zinc-500">
+              <Link href={'/contato'} className="hover:text-zinc-500">
                 Contato
               </Link>
             </li>

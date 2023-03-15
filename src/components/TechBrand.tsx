@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import { AllTechnology } from '@/models/homepage';
+import { Technology } from '@/models/technology';
 
 interface IProps {
-  techs: AllTechnology[];
+  techs: Technology[];
 }
 
 const TechBrand: React.FC<IProps> = ({ techs }) => {
