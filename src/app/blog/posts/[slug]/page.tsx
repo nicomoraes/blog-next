@@ -6,6 +6,12 @@ import {
   STATIC_GEN_POSTPAGE_QUERY,
 } from '@/queries/postpage_query';
 import { IPostPageQuery, IStaticGenParams } from '@/models/pages/post_page';
+import Markdown from 'react-markdown';
+import rehypeHighlight from 'rehype-highlight';
+import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
+import { formatDate } from '@/lib/formatDate';
+import 'highlight.js/styles/github-dark.css';
 
 interface IPostPageProps {
   params: { slug: string };
@@ -19,17 +25,36 @@ const Posts: NextPage<IPostPageProps> = ({ params }) => {
 
   const {
     data: {
-      post: { title, excerpt },
+      post: { title, excerpt, body, _createdAt },
     },
   } = post;
 
   return (
-    <main className="mx-auto my-4 w-full max-w-screen-md">
-      <div className="max-md:mx-3">
-        <h1 className="text-left text-5xl">{title}</h1>
-        <p className="my-4 text-left text-xl text-zinc-500">{excerpt}</p>
+    <main className="my-4 mx-auto w-full max-w-screen-sm overflow-hidden">
+      <div className="mx-2 md:mx-auto">
+        <div className="mb-8 flex flex-col max-md:mx-3 max-md:items-center ">
+          <h1 className="font-serif text-4xl max-md:text-center md:text-5xl">
+            {title}
+          </h1>
+          <p className="my-4 text-lg text-zinc-600 max-md:text-center md:text-xl">
+            {excerpt}
+          </p>
+          <span className="w-full text-zinc-500 max-md:text-center">
+            {formatDate(_createdAt)}
+          </span>
+          <hr className="my-4" />
+        </div>
+        <div>
+          {body && (
+            <Markdown
+              children={body}
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeRaw, rehypeHighlight]}
+              className="pre-code:bg-transparent prose prose-zinc md:prose-lg prose-pre:shadow-sm prose-pre:shadow-zinc-800 "
+            />
+          )}
+        </div>
       </div>
-      <div></div>
     </main>
   );
 };

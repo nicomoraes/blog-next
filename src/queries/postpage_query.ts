@@ -7,6 +7,7 @@ export const POSTPAGE_QUERY = (slug: string) => `query PostQuery {
     tag {
       name
     }
+    _createdAt
   }
 }
 `

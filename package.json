@@ -16,13 +16,17 @@
     "eslint-config-next": "^13.2.4",
     "framer-motion": "^10.3.0",
     "next": "13.2.4",
-    "prettier-plugin-tailwindcss": "^0.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
+    "react-markdown": "^8.0.5",
+    "rehype-highlight": "^6.0.0",
+    "rehype-raw": "^6.1.1",
+    "remark-gfm": "^3.0.1",
     "typescript": "4.9.5"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.9",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
     "@typescript-eslint/parser": "^5.54.1",
     "autoprefixer": "^10.4.14",
@@ -39,6 +43,7 @@
     "eslint-plugin-unused-imports": "^2.0.0",
     "postcss": "^8.4.21",
     "prettier": "^2.8.4",
+    "prettier-plugin-tailwindcss": "^0.2.4",
     "tailwindcss": "^3.2.7"
   }
 }
