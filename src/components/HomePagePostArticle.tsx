@@ -1,7 +1,7 @@
-import Link from 'next/link';
-import React from 'react';
 import { formatDate } from '@/lib/formatDate';
 import { Post } from '@/models/post';
+import Link from 'next/link';
+import React from 'react';
 
 interface IHomePagePostArticleProps {
   post: Post;

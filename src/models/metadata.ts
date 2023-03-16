@@ -10,6 +10,7 @@ interface Data {
 
 interface WebsiteInfo {
   metatags: Metatags;
+  keyword: Keyword[]
 }
 
 interface Metatags {
@@ -17,4 +18,8 @@ interface Metatags {
   description: string;
   image: Image;
   twitterCard: any;
+}
+
+export interface Keyword {
+  name: string
 }

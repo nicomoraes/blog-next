@@ -1,8 +1,8 @@
 'use client';
-import React, { useState } from 'react';
-import HeaderLink from './HeaderLink';
 import Image from 'next/image';
-import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
+import React, { useState } from 'react';
+import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
+import HeaderLink from './HeaderLink';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -47,7 +47,7 @@ const Header: React.FC = () => {
 
       {/* Mobile nav */}
       {isMenuOpen && (
-        <nav className="w-full bg-zinc-200 px-4">
+        <nav className="w-full bg-zinc-200 px-4 md:hidden">
           <HeaderLink href={'/'} label={'Início'} />
           <HeaderLink href={'/blog'} label={'Blog'} />
           <HeaderLink href={'/contato'} label={'Contato'} />

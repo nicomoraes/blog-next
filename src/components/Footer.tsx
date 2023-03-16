@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
           <ul className="text-zinc-50 ">
             <h3 className="mb-2 text-lg font-bold">Redes Sociais</h3>
             <li>
-              <a href="" className="flex items-center">
+              <a href="" className="flex items-center hover:text-zinc-500">
                 <Image
                   src="https://www.datocms-assets.com/96227/1678798358-github.png"
                   width={30}
@@ -40,7 +40,10 @@ const Footer: React.FC = () => {
               </a>
             </li>
             <li>
-              <a href="" className="mt-4 flex items-center">
+              <a
+                href="https://www.linkedin.com/in/nicolasmoraes-ti/"
+                className="mt-4 flex items-center hover:text-zinc-500"
+              >
                 <Image
                   src="https://www.datocms-assets.com/96227/1678798373-linkedin.png"
                   width={30}

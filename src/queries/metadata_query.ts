@@ -8,5 +8,8 @@ export const METADATA_QUERY = (page: string) => `query MyQuery {
       }
       twitterCard
     }
+    keyword {
+      name
+    }
   }
 }` 

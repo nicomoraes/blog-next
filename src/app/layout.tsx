@@ -1,8 +1,8 @@
-import './globals.css';
-import { Playfair_Display, Roboto_Flex } from 'next/font/google';
-import HireMeBanner from '@/components/HireMeBanner';
-import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Header from '@/components/Header';
+import HireMeBanner from '@/components/HireMeBanner';
+import { Playfair_Display, Roboto_Flex } from 'next/font/google';
+import './globals.css';
 
 export const metadata = {
   title: 'Página inicial',

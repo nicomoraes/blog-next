@@ -1,7 +1,7 @@
-import React from 'react';
-import Link from 'next/link';
-import { Post } from '@/models/post';
 import { formatDate } from '@/lib/formatDate';
+import { Post } from '@/models/post';
+import Link from 'next/link';
+import React from 'react';
 
 interface IBlogPagePostArticleProps {
   post: Post;
