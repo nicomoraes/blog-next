@@ -1,5 +1,5 @@
 export const BLOGPAGE_QUERY = `query BlogPageQuery {
-  allPosts(filter: {visible: {eq: "true"}}) {
+  allPosts(filter: {published: {eq: "true"}}) {
     id
     slug
     title

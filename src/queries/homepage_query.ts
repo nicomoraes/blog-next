@@ -6,7 +6,7 @@ export const HOMEPAGE_QUERY = `query HomePageQuery {
     role
     phrase
   }
-  allSocialMds {
+  allSocialMds(filter: {visibleInHome: {eq: "true"}}) {
     id
     name
     link
@@ -21,7 +21,7 @@ export const HOMEPAGE_QUERY = `query HomePageQuery {
       url
     }
   }
-  allRepositories(filter: {isVisible: {eq: "true"}})  {
+  allRepositories(filter: {visible: {eq: "true"}})  {
     id
     title
     description
@@ -33,7 +33,7 @@ export const HOMEPAGE_QUERY = `query HomePageQuery {
       }
     }
   }
-  allPosts(filter: {visible: {eq: "true"}}) {
+  allPosts(filter: {published: {eq: "true"}}) {
     id
     title
     slug

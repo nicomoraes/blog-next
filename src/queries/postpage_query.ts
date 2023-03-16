@@ -1,9 +1,9 @@
 export const POSTPAGE_QUERY = (slug: string) => `query PostQuery {
-  post(filter: {slug: {eq: "${slug}"}, visible: {eq: "true"}}) {
+  post(filter: {slug: {eq: "${slug}"}, published: {eq: "true"}}) {
+    body
+    excerpt
     slug
     title
-    excerpt
-    body
     tag {
       name
     }

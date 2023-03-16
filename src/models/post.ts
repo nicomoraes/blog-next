@@ -1,11 +1,11 @@
 export interface Post {
   id: string;
-  _createdAt: string;
+  body?: string;
+  excerpt?: string;
   slug: string;
   tag: Tag;
   title: string;
-  excerpt?: string;
-  body?: string;
+  _createdAt: string;
 }
 
 export interface Tag {

@@ -9,14 +9,14 @@ interface Data {
 }
 
 interface WebsiteInfo {
-  metatags: Metatags;
   keyword: Keyword[]
+  metatags: Metatags;
 }
 
 interface Metatags {
-  title: string;
   description: string;
   image: Image;
+  title: string;
   twitterCard: any;
 }
 
