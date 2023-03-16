@@ -1,10 +1,10 @@
-import { use } from 'react';
+import BlogPagePostArticle from '@/components/BlogPagePostArticle';
 import { getData } from '@/lib/datocms/get_data';
 import { IMetadata } from '@/models/metadata';
 import { IBlogPageQuery } from '@/models/pages/blog_page';
 import { BLOGPAGE_QUERY } from '@/queries/blogpage_query';
 import { METADATA_QUERY } from '@/queries/metadata_query';
-import BlogPagePostArticle from '@/components/BlogPagePostArticle';
+import { use } from 'react';
 
 export default function Blog() {
   const posts: IBlogPageQuery = use(getData(BLOGPAGE_QUERY));
@@ -21,19 +21,23 @@ export default function Blog() {
 }
 
 export async function generateMetadata() {
-  const post: IMetadata = await getData(METADATA_QUERY('blog'));
+  const metadata: IMetadata = await getData(METADATA_QUERY('blog'));
 
   const {
     data: {
       websiteInfo: {
         metatags: { description, image, title },
+        keyword,
       },
     },
-  } = post;
+  } = metadata;
+
+  const keywordsArray = keyword.map((keywordObj) => keywordObj.name);
 
   return {
     title: title,
     description: description,
+    keywords: keywordsArray,
     openGraph: {
       title: title,
       description: description,

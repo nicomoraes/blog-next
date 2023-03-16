@@ -1,17 +1,17 @@
-import React, { use } from 'react';
-import { NextPage } from 'next';
 import { getData } from '@/lib/datocms/get_data';
+import { formatDate } from '@/lib/formatDate';
+import { IPostPageQuery, IStaticGenParams } from '@/models/pages/post_page';
 import {
   POSTPAGE_QUERY,
   STATIC_GEN_POSTPAGE_QUERY,
 } from '@/queries/postpage_query';
-import { IPostPageQuery, IStaticGenParams } from '@/models/pages/post_page';
+import 'highlight.js/styles/github-dark.css';
+import { NextPage } from 'next';
+import { use } from 'react';
 import Markdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
-import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
-import { formatDate } from '@/lib/formatDate';
-import 'highlight.js/styles/github-dark.css';
+import remarkGfm from 'remark-gfm';
 
 interface IPostPageProps {
   params: { slug: string };
@@ -30,7 +30,7 @@ const Posts: NextPage<IPostPageProps> = ({ params }) => {
   } = post;
 
   return (
-    <main className="my-4 mx-auto w-full max-w-screen-sm overflow-hidden">
+    <main className="mx-auto mt-4 mb-40 w-full max-w-screen-sm overflow-hidden">
       <div className="mx-2 md:mx-auto">
         <div className="mb-8 flex flex-col max-md:mx-3 max-md:items-center ">
           <h1 className="font-serif text-4xl max-md:text-center md:text-5xl">
@@ -69,19 +69,20 @@ export async function generateStaticParams() {
   }));
 }
 
-//Nova forma de carregar a metadata
+//Nova forma de carregar as metadatas
 export async function generateMetadata({ params: { slug } }: IPostPageProps) {
   const post: IPostPageQuery = await getData(POSTPAGE_QUERY(slug));
 
   const {
     data: {
-      post: { title, excerpt },
+      post: { title, excerpt, tag },
     },
   } = post;
 
   return {
     title: title,
     description: excerpt,
+    keywords: [tag.name],
     openGraph: {
       title: title,
       description: excerpt,

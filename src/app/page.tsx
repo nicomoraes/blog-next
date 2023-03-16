@@ -1,13 +1,15 @@
-import Image from 'next/image';
-import { use } from 'react';
-import { getData } from '@/lib/datocms/get_data';
-import { HOMEPAGE_QUERY } from '@/queries/homepage_query';
-import { IHomePageQuery } from '@/models/pages/home_page';
+import HomePagePostArticle from '@/components/HomePagePostArticle';
 import PortfolioAccordion from '@/components/PortfolioAccordion';
 import TechBrand from '@/components/TechBrand';
-import HomePagePostArticle from '@/components/HomePagePostArticle';
-import { METADATA_QUERY } from '@/queries/metadata_query';
+import { getData } from '@/lib/datocms/get_data';
 import { IMetadata } from '@/models/metadata';
+import { IHomePageQuery } from '@/models/pages/home_page';
+import { HOMEPAGE_QUERY } from '@/queries/homepage_query';
+import { METADATA_QUERY } from '@/queries/metadata_query';
+import Image from 'next/image';
+import Link from 'next/link';
+import { use } from 'react';
+import { AiFillGithub, AiOutlineArrowRight } from 'react-icons/ai';
 
 export default function Home() {
   const myInfo: IHomePageQuery = use(getData(HOMEPAGE_QUERY));
@@ -27,7 +29,9 @@ export default function Home() {
             <span className="flex flex-col font-serif text-4xl font-medium text-zinc-800">
               <span>Olá!</span>
               <span>Meu nome é</span>
-              <span className="font-sans font-bold text-zinc-900">Nicolas</span>
+              <span className="font-sans text-5xl font-bold text-zinc-800">
+                Nicolas
+              </span>
             </span>
             <span className="my-2 w-max rounded-md bg-zinc-800 p-2 text-2xl font-medium text-zinc-300 shadow-inner shadow-zinc-600">
               Desenvolvedor{' '}
@@ -69,7 +73,7 @@ export default function Home() {
       </section>
 
       {/* Portfolio e Blog */}
-      <section className="align-start mx-2 my-4 grid max-w-screen-lg grid-cols-6 gap-4 md:mx-auto md:grid-cols-12">
+      <section className="align-start mx-2 my-20 grid max-w-screen-lg grid-cols-6 gap-4 md:mx-auto md:grid-cols-12">
         <div className="col-span-full flex flex-col self-start rounded-md border border-black py-4 px-4 shadow-md shadow-zinc-800 md:col-start-1 md:col-end-7">
           <h1 className="w-full text-center text-2xl font-bold text-zinc-800">
             Portfólio
@@ -86,7 +90,17 @@ export default function Home() {
               );
             })}
           </ul>
+          <a
+            href="https://github.com/nicomoraes"
+            className="mt-5 self-center"
+            target={'_blank'}
+          >
+            <button className="flex w-max items-center rounded-full bg-zinc-900 py-2 px-28 text-base font-bold text-zinc-50 duration-200 hover:bg-zinc-700">
+              Ver todos <AiFillGithub className="ml-2 text-zinc-50" size={35} />
+            </button>
+          </a>
         </div>
+
         <div className="col-span-full flex max-h-max flex-col self-start rounded-md border border-black py-4 px-4 shadow-md shadow-zinc-800  md:col-start-7 md:col-end-13">
           <h1 className="w-full text-center text-2xl font-bold text-zinc-800">
             Blog
@@ -99,6 +113,12 @@ export default function Home() {
               return <HomePagePostArticle key={post.id} post={post} />;
             })}
           </ul>
+          <Link href="/blog" className="mt-5 self-center">
+            <button className="flex w-max items-center rounded-full bg-zinc-900 py-3 px-28 text-base font-bold text-zinc-50 duration-200 hover:bg-zinc-700">
+              Acessar blog{' '}
+              <AiOutlineArrowRight className="ml-2 text-zinc-50" size={25} />
+            </button>
+          </Link>
         </div>
       </section>
     </main>
@@ -106,19 +126,23 @@ export default function Home() {
 }
 
 export async function generateMetadata() {
-  const post: IMetadata = await getData(METADATA_QUERY('home'));
+  const metadata: IMetadata = await getData(METADATA_QUERY('home'));
 
   const {
     data: {
       websiteInfo: {
         metatags: { description, image, title },
+        keyword,
       },
     },
-  } = post;
+  } = metadata;
+
+  const keywordsArray = keyword.map((keywordObj) => keywordObj.name);
 
   return {
     title: title,
     description: description,
+    keywords: keywordsArray,
     openGraph: {
       title: title,
       description: description,
