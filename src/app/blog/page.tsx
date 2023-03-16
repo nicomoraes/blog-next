@@ -7,12 +7,12 @@ import { METADATA_QUERY } from '@/queries/metadata_query';
 import { use } from 'react';
 
 export default function Blog() {
-  const posts: IBlogPageQuery = use(getData(BLOGPAGE_QUERY));
+  const query: IBlogPageQuery = use(getData(BLOGPAGE_QUERY));
   return (
     <main className="mx-2 h-screen max-w-screen-md md:mx-auto">
       <h1 className="font-serif text-4xl md:mb-4">Todos as postagens</h1>
       <section>
-        {posts.data.allPosts.map((post) => (
+        {query.data.allPosts.map((post) => (
           <BlogPagePostArticle post={post} key={post.id} />
         ))}
       </section>

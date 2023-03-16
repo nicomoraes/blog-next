@@ -21,13 +21,13 @@ const Posts: NextPage<IPostPageProps> = ({ params }) => {
   const { slug } = params;
 
   //Faz busca cacheada para cada post
-  const post: IPostPageQuery = use(getData(POSTPAGE_QUERY(slug)));
+  const query: IPostPageQuery = use(getData(POSTPAGE_QUERY(slug)));
 
   const {
     data: {
       post: { title, excerpt, body, _createdAt },
     },
-  } = post;
+  } = query;
 
   return (
     <main className="mx-auto mt-4 mb-40 w-full max-w-screen-sm overflow-hidden">
