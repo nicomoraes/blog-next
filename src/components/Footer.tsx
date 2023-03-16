@@ -1,8 +1,30 @@
-import Image from 'next/image';
+import { getData } from '@/lib/datocms/get_data';
+import { SocialMedia } from '@/models/social_media';
 import Link from 'next/link';
-import React from 'react';
+import React, { use } from 'react';
+import SocialMediaLink from './SocialMediaLink';
+
+export const FOOTER_SOCIALMEDIAS_QUERY = `query MySocialMedias {
+  allSocialMds(filter: {visibleInFooter: {eq: "true"}}) {
+    id
+    name
+    link
+    logo {
+      url
+    }
+  }
+}
+`;
+
+export interface IFooterPageQuery {
+  data: {
+    allSocialMds: SocialMedia[];
+  };
+}
 
 const Footer: React.FC = () => {
+  const query: IFooterPageQuery = use(getData(FOOTER_SOCIALMEDIAS_QUERY));
+
   return (
     <footer className="w-full bg-zinc-800 py-4">
       <div className="mx-auto max-w-screen-lg">
@@ -27,33 +49,17 @@ const Footer: React.FC = () => {
           </ul>
           <ul className="text-zinc-50 ">
             <h3 className="mb-2 text-lg font-bold">Redes Sociais</h3>
-            <li>
-              <a href="" className="flex items-center hover:text-zinc-500">
-                <Image
-                  src="https://www.datocms-assets.com/96227/1678798358-github.png"
-                  width={30}
-                  height={30}
-                  alt={'Github logo'}
-                  className={'mr-2'}
-                />{' '}
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.linkedin.com/in/nicolasmoraes-ti/"
-                className="mt-4 flex items-center hover:text-zinc-500"
-              >
-                <Image
-                  src="https://www.datocms-assets.com/96227/1678798373-linkedin.png"
-                  width={30}
-                  height={30}
-                  alt={'LinkedIn logo'}
-                  className={'mr-2'}
-                />{' '}
-                LinkedIn
-              </a>
-            </li>
+            {query.data.allSocialMds.map((social_media) => (
+              <li key={social_media.id}>
+                <SocialMediaLink
+                  link={social_media.link}
+                  logo_alt={social_media.logo.alt ?? 'Logo'}
+                  logo_url={social_media.logo.url}
+                  name={social_media.name}
+                  showName={true}
+                />
+              </li>
+            ))}
           </ul>
         </div>
       </div>

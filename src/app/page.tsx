@@ -1,5 +1,6 @@
 import HomePagePostArticle from '@/components/HomePagePostArticle';
 import PortfolioAccordion from '@/components/PortfolioAccordion';
+import SocialMediaLink from '@/components/SocialMediaLink';
 import TechBrand from '@/components/TechBrand';
 import { getData } from '@/lib/datocms/get_data';
 import { IMetadata } from '@/models/metadata';
@@ -12,7 +13,7 @@ import { use } from 'react';
 import { AiFillGithub, AiOutlineArrowRight } from 'react-icons/ai';
 
 export default function Home() {
-  const myInfo: IHomePageQuery = use(getData(HOMEPAGE_QUERY));
+  const query: IHomePageQuery = use(getData(HOMEPAGE_QUERY));
   return (
     <main className="w-full">
       {/* Hero */}
@@ -20,7 +21,7 @@ export default function Home() {
         <div className=" flex flex-col items-center justify-center">
           <Image
             className="mr-2 h-[174px] rounded-full border-2 border-zinc-500 bg-zinc-600"
-            src={myInfo.data.myinfo.photo.url}
+            src={query.data.myinfo.photo.url}
             width={174}
             height={174}
             alt="Minha foto"
@@ -36,32 +37,24 @@ export default function Home() {
             <span className="my-2 w-max rounded-md bg-zinc-800 p-2 text-2xl font-medium text-zinc-300 shadow-inner shadow-zinc-600">
               Desenvolvedor{' '}
               <span className="font-bold text-zinc-50">
-                {myInfo.data.myinfo.role}
+                {query.data.myinfo.role}
               </span>
             </span>
             <p className="max-w-[500px] font-serif text-base font-medium text-zinc-900">
-              {myInfo.data.myinfo.phrase}
+              {query.data.myinfo.phrase}
             </p>
 
             {/* Mídias Sociais */}
             <div className="mt-3 flex">
-              {myInfo.data.allSocialMds.map((social_media) => {
-                return (
-                  <a
-                    href={social_media.link}
-                    target="_blank"
-                    className="mx-2 rounded-md bg-zinc-800 p-1 shadow-sm shadow-zinc-500 duration-300 hover:scale-110 hover:bg-zinc-900"
-                    key={social_media.id}
-                  >
-                    <Image
-                      src={social_media.logo.url}
-                      width={30}
-                      height={30}
-                      alt="Logo da mídia social"
-                    />
-                  </a>
-                );
-              })}
+              {query.data.allSocialMds.map((social_media) => (
+                <SocialMediaLink
+                  key={social_media.id}
+                  link={social_media.link}
+                  logo_alt={social_media.logo.alt ?? 'Logo'}
+                  logo_url={social_media.logo.url}
+                  name={social_media.name}
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -69,7 +62,7 @@ export default function Home() {
 
       {/* Tech Stack */}
       <section className="mx-2 my-10 grid max-w-screen-lg grid-flow-col place-items-center gap-2 rounded-md bg-zinc-800 p-2 shadow-md shadow-black md:mx-auto">
-        <TechBrand techs={myInfo.data.allTechnologies} />
+        <TechBrand techs={query.data.allTechnologies} />
       </section>
 
       {/* Portfolio e Blog */}
@@ -84,7 +77,7 @@ export default function Home() {
             prograação web."
           </p>
           <ul className="list-none">
-            {myInfo.data.allRepositories.map((repository) => {
+            {query.data.allRepositories.map((repository) => {
               return (
                 <PortfolioAccordion key={repository.id} repo={repository} />
               );
@@ -109,7 +102,7 @@ export default function Home() {
             "Algumas dicas e discussões sobre programação web moderna."
           </p>
           <ul className="flex h-full list-none flex-col justify-between">
-            {myInfo.data.allPosts.map((post) => {
+            {query.data.allPosts.map((post) => {
               return <HomePagePostArticle key={post.id} post={post} />;
             })}
           </ul>
