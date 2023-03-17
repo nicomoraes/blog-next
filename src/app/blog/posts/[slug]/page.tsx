@@ -1,12 +1,15 @@
 import { getData } from '@/lib/datocms/get_data';
 import { formatDate } from '@/lib/formatDate';
-import { IPostPageQuery, IStaticGenParams } from '@/models/pages/post_page';
+import type {
+  IPostPageQuery,
+  IStaticGenParams,
+} from '@/models/pages/post_page';
 import {
   POSTPAGE_QUERY,
   STATIC_GEN_POSTPAGE_QUERY,
 } from '@/queries/postpage_query';
 import 'highlight.js/styles/github-dark.css';
-import { NextPage } from 'next';
+import type { Metadata, NextPage } from 'next';
 import { use } from 'react';
 import Markdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
@@ -70,7 +73,9 @@ export async function generateStaticParams() {
 }
 
 //Nova forma de carregar as metadatas
-export async function generateMetadata({ params: { slug } }: IPostPageProps) {
+export async function generateMetadata({
+  params: { slug },
+}: IPostPageProps): Promise<Metadata> {
   const post: IPostPageQuery = await getData(POSTPAGE_QUERY(slug));
 
   const {

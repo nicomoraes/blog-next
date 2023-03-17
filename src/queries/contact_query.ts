@@ -1,5 +1,5 @@
 export const CONTACTPAGE_QUERY = `query ContactPageQuery {
-  allSocialMds(filter: {visible: {eq: "true"}}) {
+  allSocialMds(filter: {visibleInContact: {eq: "true"}}) {
     id
     link
     logo {

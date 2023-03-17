@@ -1,9 +1,10 @@
 import BlogPagePostArticle from '@/components/BlogPagePostArticle';
 import { getData } from '@/lib/datocms/get_data';
-import { IMetadata } from '@/models/metadata';
-import { IBlogPageQuery } from '@/models/pages/blog_page';
+import type { IMetadata } from '@/models/metadata';
+import type { IBlogPageQuery } from '@/models/pages/blog_page';
 import { BLOGPAGE_QUERY } from '@/queries/blogpage_query';
 import { METADATA_QUERY } from '@/queries/metadata_query';
+import type { Metadata } from 'next';
 import { use } from 'react';
 
 export default function Blog() {
@@ -20,7 +21,7 @@ export default function Blog() {
   );
 }
 
-export async function generateMetadata() {
+export async function generateMetadata(): Promise<Metadata> {
   const metadata: IMetadata = await getData(METADATA_QUERY('blog'));
 
   const {

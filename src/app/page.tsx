@@ -7,6 +7,7 @@ import { IMetadata } from '@/models/metadata';
 import { IHomePageQuery } from '@/models/pages/home_page';
 import { HOMEPAGE_QUERY } from '@/queries/homepage_query';
 import { METADATA_QUERY } from '@/queries/metadata_query';
+import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { use } from 'react';
@@ -118,7 +119,7 @@ export default function Home() {
   );
 }
 
-export async function generateMetadata() {
+export async function generateMetadata(): Promise<Metadata> {
   const metadata: IMetadata = await getData(METADATA_QUERY('home'));
 
   const {

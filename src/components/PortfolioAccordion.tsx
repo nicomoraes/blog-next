@@ -18,7 +18,7 @@ const PortfolioAccordion: React.FC<IPortfolioAccordionProps> = ({
   return (
     <li className={`my-4 max-h-max w-full rounded-xl bg-zinc-800 p-4`}>
       <div className="flex w-full items-center">
-        <h1 className="w-[34ch] truncate font-serif  text-lg font-bold text-zinc-50 md:text-xl">
+        <h1 className="w-full truncate font-serif  text-lg font-bold text-zinc-50 md:text-xl">
           {title}
         </h1>
         <button

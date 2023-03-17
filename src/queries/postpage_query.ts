@@ -13,7 +13,7 @@ export const POSTPAGE_QUERY = (slug: string) => `query PostQuery {
 `
 
 export const STATIC_GEN_POSTPAGE_QUERY = `query GetPostsSlugQuery {
-  allPosts(filter: {visible: {eq: "true"}}) {
+  allPosts(filter: {published: {eq: "true"}}) {
     slug
   }
 }
