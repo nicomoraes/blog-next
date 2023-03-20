@@ -3,11 +3,11 @@ import PortfolioAccordion from '@/components/PortfolioAccordion';
 import SocialMediaLink from '@/components/SocialMediaLink';
 import TechBrand from '@/components/TechBrand';
 import { getData } from '@/lib/datocms/get_data';
-import { IMetadata } from '@/models/metadata';
-import { IHomePageQuery } from '@/models/pages/home_page';
+import type { IMetadata } from '@/models/metadata';
+import type { IHomePageQuery } from '@/models/pages/home_page';
 import { HOMEPAGE_QUERY } from '@/queries/homepage_query';
 import { METADATA_QUERY } from '@/queries/metadata_query';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { use } from 'react';
@@ -66,7 +66,7 @@ export default function Home() {
         <TechBrand techs={query.data.allTechnologies} />
       </section>
 
-      {/* Portfolio e Blog */}
+      {/* Portfolio */}
       <section className="align-start mx-2 my-20 grid max-w-screen-lg grid-cols-6 gap-4 md:mx-auto md:grid-cols-12">
         <div className="col-span-full flex flex-col self-start rounded-md border border-black py-4 px-4 shadow-md shadow-zinc-800 md:col-start-1 md:col-end-7">
           <h1 className="w-full text-center text-2xl font-bold text-zinc-800">
@@ -74,8 +74,8 @@ export default function Home() {
           </h1>
           <p className="w-full text-center font-serif font-medium">
             "Alguns projetos que desenvolvi durante os últimos anos visando o
-            aprendizado e aprimoramento sobre novas e modernas tecnologias de
-            prograação web."
+            aprendizado e aprimoramento de novas e modernas tecnologias de
+            programção."
           </p>
           <ul className="list-none">
             {query.data.allRepositories.map((repository) => {
@@ -95,6 +95,7 @@ export default function Home() {
           </a>
         </div>
 
+        {/* Blog */}
         <div className="col-span-full flex max-h-max flex-col self-start rounded-md border border-black py-4 px-4 shadow-md shadow-zinc-800  md:col-start-7 md:col-end-13">
           <h1 className="w-full text-center text-2xl font-bold text-zinc-800">
             Blog
@@ -140,7 +141,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: title,
       description: description,
-      url: `https://nicolasmoraes.vercel.app/blog`,
+      url: `https://nicolasmoraes.vercel.app`,
       siteName: 'Nicolas Moraes',
       images: [
         {

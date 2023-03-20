@@ -15,8 +15,8 @@ const TechBrand: React.FC<IProps> = ({ techs }) => {
         >
           <Image
             src={tech.logo.url}
-            width={40}
-            height={40}
+            width={32}
+            height={32}
             alt="Logo"
             className="h-8 w-8 md:h-10 md:w-10"
           />

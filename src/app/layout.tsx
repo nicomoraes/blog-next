@@ -1,9 +1,10 @@
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
+import type { Metadata } from 'next';
 import { Playfair_Display, Roboto_Flex } from 'next/font/google';
 import './globals.css';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Página inicial',
   description: 'Portfolio Website',
   icons: {

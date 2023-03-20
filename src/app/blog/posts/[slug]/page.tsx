@@ -9,7 +9,7 @@ import {
   STATIC_GEN_POSTPAGE_QUERY,
 } from '@/queries/postpage_query';
 import 'highlight.js/styles/github-dark.css';
-import type { Metadata, NextPage } from 'next';
+import type { Metadata } from 'next';
 import { use } from 'react';
 import Markdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
@@ -20,7 +20,7 @@ interface IPostPageProps {
   params: { slug: string };
 }
 
-const Posts: NextPage<IPostPageProps> = ({ params }) => {
+export default function Posts({ params }: IPostPageProps) {
   const { slug } = params;
 
   //Faz busca cacheada para cada post
@@ -60,9 +60,7 @@ const Posts: NextPage<IPostPageProps> = ({ params }) => {
       </div>
     </main>
   );
-};
-
-export default Posts;
+}
 
 //Nova forma de utilizar o getStaticPaths com Server Components
 export async function generateStaticParams() {
