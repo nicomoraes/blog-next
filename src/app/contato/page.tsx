@@ -1,12 +1,21 @@
-import Input from '@/components/Input';
+import { ContactForm } from '@/components/ContactForm';
 import SocialMediaLink from '@/components/SocialMediaLink';
 import { getData } from '@/lib/datocms/get_data';
+import type { IMetadata } from '@/models/metadata';
 import type { IContactPageQuery } from '@/models/pages/contact_page';
-import { CONTACTPAGE_QUERY } from '@/queries/contact_query';
-import React, { use } from 'react';
+import { CONTACTPAGE_QUERY } from '@/queries/contactpage_query';
+import { METADATA_QUERY } from '@/queries/metadata_query';
+import type { Metadata } from 'next';
+import { use } from 'react';
 
-const Contato: React.FC = () => {
+export default function Contact() {
   const query: IContactPageQuery = use(getData(CONTACTPAGE_QUERY));
+
+  const email_service = {
+    service_id: process.env.EMAILJS_SERVICE_ID as string,
+    template_id: process.env.EMAILJS_TEMPLATE_ID as string,
+    public_key: process.env.EMAILJS_PUBLIC_KEY as string,
+  };
 
   return (
     <main className="mx-auto flex max-w-screen-lg">
@@ -25,23 +34,41 @@ const Contato: React.FC = () => {
             />
           ))}
         </div>
-        <form action="" className="flex flex-col">
-          <div className="flex flex-col">
-            <Input label="Nome" name="name" />
-            <Input label="E-mail" name="email" type="email" />
-            <Input label="Assunto" name="subject" />
-            <Input label="Descrição" name="body" isTextArea />
-          </div>
-          <button
-            type="submit"
-            className="mt-5 items-center self-center rounded-full bg-zinc-900 py-4 px-28 text-base font-bold text-zinc-50 duration-200 hover:bg-zinc-700"
-          >
-            Enviar
-          </button>
-        </form>
+        <ContactForm email_service={email_service} />
       </div>
     </main>
   );
-};
+}
 
-export default Contato;
+export async function generateMetadata(): Promise<Metadata> {
+  const metadata: IMetadata = await getData(METADATA_QUERY('contact'));
+
+  const {
+    data: {
+      websiteInfo: {
+        metatags: { description, image, title },
+      },
+    },
+  } = metadata;
+
+  return {
+    title: title,
+    description: description,
+    keywords: ['contato', 'contact'],
+    openGraph: {
+      title: title,
+      description: description,
+      url: `https://nicolasmoraes.vercel.app/contato`,
+      siteName: 'Nicolas Moraes',
+      images: [
+        {
+          url: image.url,
+          width: 800,
+          height: 600,
+        },
+      ],
+      locale: 'pt-BR',
+      type: 'website',
+    },
+  };
+}
