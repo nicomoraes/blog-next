@@ -152,20 +152,20 @@ const FormSubmitMessageModal: React.FC<{ form: IFormState }> = ({
 }) => {
   return (
     <motion.div
-      initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed bottom-1/2 flex h-20 flex-col items-center justify-center self-center rounded-md bg-zinc-800 p-3 shadow-md shadow-zinc-700"
+      initial={{ opacity: 0 }}
+      className="fixed bottom-1/2 flex h-20 flex-col items-center justify-center self-center rounded-md bg-zinc-800 p-3 shadow-md shadow-zinc-700 max-sm:mx-4"
     >
       <span
-        className={`font-sans text-xl ${
+        className={`text-center font-sans text-lg md:text-xl ${
           status === 'error' ? 'text-red-500' : 'text-green-500'
         }`}
       >
         {message}
       </span>
       <span
-        className={`font-sans text-base ${
+        className={`text-center font-sans text-base ${
           status === 'error' ? 'text-red-400' : 'text-green-400'
         }`}
       >
