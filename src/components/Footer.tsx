@@ -23,7 +23,11 @@ export interface IFooterPageQuery {
 }
 
 const Footer: React.FC = () => {
-  const query: IFooterPageQuery = use(getData(FOOTER_SOCIALMEDIAS_QUERY));
+  const query: IFooterPageQuery = use(
+    getData(FOOTER_SOCIALMEDIAS_QUERY, {
+      next: { revalidate: 60 * 60 * 24 * 7 },
+    })
+  );
 
   return (
     <footer className="w-full bg-zinc-800 py-4">
@@ -53,8 +57,7 @@ const Footer: React.FC = () => {
               <li key={social_media.id}>
                 <SocialMediaLink
                   link={social_media.link}
-                  logo_alt={social_media.logo.alt ?? 'Logo'}
-                  logo_url={social_media.logo.url}
+                  logo={social_media.logo}
                   name={social_media.name}
                   showName={true}
                 />

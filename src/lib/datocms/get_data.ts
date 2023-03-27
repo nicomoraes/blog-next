@@ -1,9 +1,4 @@
-type CacheType = 'force-cache' | 'no-store';
-
-export const getData = async (
-  query: string,
-  cacheType: CacheType = 'force-cache'
-) => {
+export const getData = async (query: string, options?: RequestInit) => {
   try {
     const res = await fetch('https://graphql.datocms.com/', {
       method: 'POST',
@@ -15,7 +10,7 @@ export const getData = async (
       body: JSON.stringify({
         query: `${query}`,
       }),
-      cache: cacheType,
+      ...options,
     });
     return await res.json();
   } catch (error) {

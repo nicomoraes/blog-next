@@ -24,7 +24,9 @@ export default function Posts({ params }: IPostPageProps) {
   const { slug } = params;
 
   //Faz busca cacheada para cada post
-  const query: IPostPageQuery = use(getData(POSTPAGE_QUERY(slug)));
+  const query: IPostPageQuery = use(
+    getData(POSTPAGE_QUERY(slug), { next: { revalidate: 60 * 60 * 24 } })
+  );
 
   const {
     data: {

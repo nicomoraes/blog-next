@@ -9,7 +9,9 @@ import type { Metadata } from 'next';
 import { use } from 'react';
 
 export default function Contact() {
-  const query: IContactPageQuery = use(getData(CONTACTPAGE_QUERY));
+  const query: IContactPageQuery = use(
+    getData(CONTACTPAGE_QUERY, { next: { revalidate: 60 * 60 * 24 * 7 } })
+  );
 
   const email_service = {
     service_id: process.env.EMAILJS_SERVICE_ID as string,
@@ -24,9 +26,9 @@ export default function Contact() {
           {query.data.allSocialMds.map((social_media) => (
             <SocialMediaLink
               key={social_media.id}
+              islink={social_media.islink}
               link={social_media.link}
-              logo_alt={social_media.logo.alt ?? 'Logo'}
-              logo_url={social_media.logo.url}
+              logo={social_media.logo}
               name={social_media.name}
               textStyle="text-zinc-50"
               showName

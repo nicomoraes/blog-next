@@ -8,7 +8,9 @@ import type { Metadata } from 'next';
 import { use } from 'react';
 
 export default function Blog() {
-  const query: IBlogPageQuery = use(getData(BLOGPAGE_QUERY));
+  const query: IBlogPageQuery = use(
+    getData(BLOGPAGE_QUERY, { next: { revalidate: 60 * 60 * 24 } })
+  );
   return (
     <main className="mx-2 h-screen max-w-screen-md md:mx-auto">
       <h1 className="font-serif text-4xl md:mb-4">Todos as postagens</h1>

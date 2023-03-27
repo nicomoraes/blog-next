@@ -14,7 +14,9 @@ import { use } from 'react';
 import { AiFillGithub, AiOutlineArrowRight } from 'react-icons/ai';
 
 export default function Home() {
-  const query: IHomePageQuery = use(getData(HOMEPAGE_QUERY));
+  const query: IHomePageQuery = use(
+    getData(HOMEPAGE_QUERY, { next: { revalidate: 60 * 60 * 12 } })
+  );
   return (
     <main className="w-full">
       {/* Hero */}
@@ -51,8 +53,7 @@ export default function Home() {
                 <SocialMediaLink
                   key={social_media.id}
                   link={social_media.link}
-                  logo_alt={social_media.logo.alt ?? 'Logo'}
-                  logo_url={social_media.logo.url}
+                  logo={social_media.logo}
                   name={social_media.name}
                 />
               ))}

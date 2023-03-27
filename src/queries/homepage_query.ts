@@ -8,11 +8,11 @@ export const HOMEPAGE_QUERY = `query HomePageQuery {
   }
   allSocialMds(filter: {visibleInHome: {eq: "true"}}) {
     id
-    name
     link
     logo {
       url
     }
+    name
   }
   allTechnologies(filter: {visible: {eq: "true"}}) {
     id
@@ -43,4 +43,4 @@ export const HOMEPAGE_QUERY = `query HomePageQuery {
     _createdAt
   }
 }
-` 
+`;
