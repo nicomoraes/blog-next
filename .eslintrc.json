@@ -15,7 +15,7 @@
         "unused-imports",
         "tailwindcss",
         "simple-import-sort",
-        "prettier-plugin-tailwindcss"
+        "prettier-tailwindcss"
       ],
       "extends": [
         "plugin:tailwindcss/recommended",
@@ -27,7 +27,7 @@
         "project": "./tsconfig.json"
       },
       "rules": {
-        "react/destructuring-assignment": "off", 
+        "react/destructuring-assignment": "off",
         "react/require-default-props": "off", // Allow non-defined react props as undefined
         "react/jsx-props-no-spreading": "off", // _app.tsx uses spread operator and also, react-hook-form
         "react-hooks/exhaustive-deps": "off", // Incorrectly report needed dependency with Next.js router
