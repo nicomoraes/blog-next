@@ -10,7 +10,7 @@ export const POSTPAGE_QUERY = (slug: string) => `query PostQuery {
     _createdAt
   }
 }
-`
+`;
 
 export const STATIC_GEN_POSTPAGE_QUERY = `query GetPostsSlugQuery {
   allPosts(filter: {published: {eq: "true"}}) {

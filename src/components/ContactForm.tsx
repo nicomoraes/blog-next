@@ -2,8 +2,10 @@
 
 import emailjs from '@emailjs/browser';
 import { AnimatePresence, motion } from 'framer-motion';
-import { FormEvent, useCallback, useRef, useState } from 'react';
+import type { FormEvent } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { ImSpinner2 } from 'react-icons/im';
+
 import Input from './Input';
 
 interface IFormData {
@@ -136,7 +138,8 @@ export const ContactForm: React.FC<IContactFormProps> = ({
         )}
       </button>
       <AnimatePresence>
-        {formState.status != 'hidden' && (
+        {formState.status !== 'hidden' && (
+          // eslint-disable-next-line @typescript-eslint/no-use-before-define
           <FormSubmitMessageModal form={formState} />
         )}
       </AnimatePresence>

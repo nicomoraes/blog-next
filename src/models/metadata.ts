@@ -1,4 +1,4 @@
-import { Image } from "./image";
+import type { Image } from './image';
 
 export interface IMetadata {
   data: Data;
@@ -9,7 +9,7 @@ interface Data {
 }
 
 interface WebsiteInfo {
-  keyword: Keyword[]
+  keyword: Keyword[];
   metatags: Metatags;
 }
 
@@ -21,5 +21,5 @@ interface Metatags {
 }
 
 export interface Keyword {
-  name: string
+  name: string;
 }

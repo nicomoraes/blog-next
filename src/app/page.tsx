@@ -1,3 +1,9 @@
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+import { use } from 'react';
+import { AiFillGithub, AiOutlineArrowRight } from 'react-icons/ai';
+
 import HomePagePostArticle from '@/components/HomePagePostArticle';
 import PortfolioAccordion from '@/components/PortfolioAccordion';
 import SocialMediaLink from '@/components/SocialMediaLink';
@@ -7,11 +13,6 @@ import type { IMetadata } from '@/models/metadata';
 import type { IHomePageQuery } from '@/models/pages/home_page';
 import { HOMEPAGE_QUERY } from '@/queries/homepage_query';
 import { METADATA_QUERY } from '@/queries/metadata_query';
-import type { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
-import { use } from 'react';
-import { AiFillGithub, AiOutlineArrowRight } from 'react-icons/ai';
 
 export default function Home() {
   const query: IHomePageQuery = use(
@@ -68,15 +69,15 @@ export default function Home() {
       </section>
 
       {/* Portfolio */}
-      <section className="align-start mx-2 my-20 grid max-w-screen-lg grid-cols-6 gap-4 md:mx-auto md:grid-cols-12">
-        <div className="col-span-full flex flex-col self-start rounded-md border border-black py-4 px-4 shadow-md shadow-zinc-800 md:col-start-1 md:col-end-7">
+      <section className="mx-2 my-20 grid max-w-screen-lg grid-cols-6 gap-4 md:mx-auto md:grid-cols-12">
+        <div className="col-span-full flex flex-col self-start rounded-md border border-black p-4 shadow-md shadow-zinc-800 md:col-start-1 md:col-end-7">
           <h1 className="w-full text-center text-2xl font-bold text-zinc-800">
             Portfólio
           </h1>
           <p className="w-full text-center font-serif font-medium">
-            "Alguns projetos que desenvolvi durante os últimos anos visando o
-            aprendizado e aprimoramento de novas e modernas tecnologias de
-            programção."
+            &quot;Alguns projetos que desenvolvi durante os últimos anos visando
+            o aprendizado e aprimoramento de novas e modernas tecnologias de
+            programção.&quot;
           </p>
           <ul className="list-none">
             {query.data.allRepositories.map((repository) => {
@@ -97,12 +98,13 @@ export default function Home() {
         </div>
 
         {/* Blog */}
-        <div className="col-span-full flex max-h-max flex-col self-start rounded-md border border-black py-4 px-4 shadow-md shadow-zinc-800  md:col-start-7 md:col-end-13">
+        <div className="col-span-full flex max-h-max flex-col self-start rounded-md border border-black p-4 shadow-md shadow-zinc-800 md:col-start-7  md:col-end-13">
           <h1 className="w-full text-center text-2xl font-bold text-zinc-800">
             Blog
           </h1>
           <p className="w-full text-center font-serif font-medium">
-            "Algumas dicas e discussões sobre programação web moderna."
+            &quot;Algumas dicas e discussões sobre programação web
+            moderna.&quot;
           </p>
           <ul className="flex h-full list-none flex-col justify-between">
             {query.data.allPosts.map((post) => {
@@ -136,12 +138,12 @@ export async function generateMetadata(): Promise<Metadata> {
   const keywordsArray = keyword.map((keywordObj) => keywordObj.name);
 
   return {
-    title: title,
-    description: description,
+    title,
+    description,
     keywords: keywordsArray,
     openGraph: {
-      title: title,
-      description: description,
+      title,
+      description,
       url: `https://nicolasmoraes.vercel.app`,
       siteName: 'Nicolas Moraes',
       images: [

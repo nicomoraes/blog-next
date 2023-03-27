@@ -1,11 +1,12 @@
+import type { Metadata } from 'next';
+import { use } from 'react';
+
 import BlogPagePostArticle from '@/components/BlogPagePostArticle';
 import { getData } from '@/lib/datocms/get_data';
 import type { IMetadata } from '@/models/metadata';
 import type { IBlogPageQuery } from '@/models/pages/blog_page';
 import { BLOGPAGE_QUERY } from '@/queries/blogpage_query';
 import { METADATA_QUERY } from '@/queries/metadata_query';
-import type { Metadata } from 'next';
-import { use } from 'react';
 
 export default function Blog() {
   const query: IBlogPageQuery = use(
@@ -38,12 +39,12 @@ export async function generateMetadata(): Promise<Metadata> {
   const keywordsArray = keyword.map((keywordObj) => keywordObj.name);
 
   return {
-    title: title,
-    description: description,
+    title,
+    description,
     keywords: keywordsArray,
     openGraph: {
-      title: title,
-      description: description,
+      title,
+      description,
       url: `https://nicolasmoraes.vercel.app/blog`,
       siteName: 'Nicolas Moraes',
       images: [

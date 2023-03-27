@@ -1,4 +1,4 @@
-import { Post } from "../post"
+import type { Post } from '../post';
 
 export interface IPostPageQuery {
   data: Data;
@@ -10,6 +10,6 @@ interface Data {
 
 export interface IStaticGenParams {
   data: {
-    allPosts: Pick<Post, "slug">[]
-  }
+    allPosts: Pick<Post, 'slug'>[];
+  };
 }

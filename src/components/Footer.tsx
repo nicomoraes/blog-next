@@ -1,7 +1,9 @@
-import { getData } from '@/lib/datocms/get_data';
-import { SocialMedia } from '@/models/social_media';
 import Link from 'next/link';
 import React, { use } from 'react';
+
+import { getData } from '@/lib/datocms/get_data';
+import type { SocialMedia } from '@/models/social_media';
+
 import SocialMediaLink from './SocialMediaLink';
 
 export const FOOTER_SOCIALMEDIAS_QUERY = `query MySocialMedias {

@@ -1,8 +1,10 @@
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
+import './globals.css';
+
 import type { Metadata } from 'next';
 import { Playfair_Display, Roboto_Flex } from 'next/font/google';
-import './globals.css';
+
+import Footer from '@/components/Footer';
+import Header from '@/components/Header';
 
 export const metadata: Metadata = {
   title: 'Página inicial',
@@ -12,13 +14,13 @@ export const metadata: Metadata = {
   },
 };
 
-export const pf_display = Playfair_Display({
+export const pfDisplay = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-pf-display',
   display: 'swap',
 });
 
-export const roboto_flex = Roboto_Flex({
+export const robotoFlex = Roboto_Flex({
   subsets: ['latin'],
   variable: '--font-roboto-flex',
   display: 'swap',
@@ -32,7 +34,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${pf_display.variable} ${roboto_flex.variable}`}
+      className={`${pfDisplay.variable} ${robotoFlex.variable}`}
     >
       <body>
         {/* <HireMeBanner /> */}

@@ -14,6 +14,6 @@ export const getData = async (query: string, options?: RequestInit) => {
     });
     return await res.json();
   } catch (error) {
-    console.log(error);
+    return console.log(error);
   }
 };

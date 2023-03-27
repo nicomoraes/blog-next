@@ -1,8 +1,10 @@
 'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
+
 import HeaderLink from './HeaderLink';
 
 const Header: React.FC = () => {

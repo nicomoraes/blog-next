@@ -1,4 +1,5 @@
-import { forwardRef, HTMLAttributes, LegacyRef } from 'react';
+import type { HTMLAttributes, LegacyRef } from 'react';
+import { forwardRef } from 'react';
 
 interface IInputProps extends HTMLAttributes<HTMLInputElement> {
   isTextArea?: boolean;
@@ -53,5 +54,7 @@ const Input = forwardRef<
     );
   }
 );
+
+Input.displayName = 'Input';
 
 export default Input;

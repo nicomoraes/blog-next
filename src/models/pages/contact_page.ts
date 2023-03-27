@@ -1,9 +1,9 @@
-import { SocialMedia } from "../social_media"
+import type { SocialMedia } from '../social_media';
 
 export interface IContactPageQuery {
-  data: Data
+  data: Data;
 }
 
 export interface Data {
-  allSocialMds: SocialMedia[]
+  allSocialMds: SocialMedia[];
 }

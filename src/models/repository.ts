@@ -1,4 +1,4 @@
-import { Image } from './image'
+import type { Image } from './image';
 
 export interface Repository {
   id: string;
@@ -12,4 +12,3 @@ export interface Tech {
   id: string;
   logo: Image;
 }
-

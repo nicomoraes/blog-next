@@ -10,4 +10,4 @@ export const BLOGPAGE_QUERY = `query BlogPageQuery {
     _createdAt
   }
 }
-` 
+`;

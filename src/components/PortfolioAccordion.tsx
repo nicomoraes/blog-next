@@ -1,10 +1,12 @@
 'use client';
-import { Repository } from '@/models/repository';
+
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { BiLinkExternal } from 'react-icons/bi';
 import { SlArrowDown } from 'react-icons/sl';
+
+import type { Repository } from '@/models/repository';
 
 interface IPortfolioAccordionProps {
   repo: Repository;
@@ -53,7 +55,7 @@ const PortfolioAccordion: React.FC<IPortfolioAccordionProps> = ({
               <div className="flex items-center">
                 {techs.map((tech) => (
                   <Image
-                    key={tech.id + '_repo_tech_logo'}
+                    key={`${tech.id}_repo_tech_logo`}
                     src={tech.logo.url}
                     width={50}
                     height={50}
@@ -62,7 +64,7 @@ const PortfolioAccordion: React.FC<IPortfolioAccordionProps> = ({
                   />
                 ))}
               </div>
-              {link != '' && (
+              {link !== '' && (
                 <a
                   href={link}
                   className="flex h-9 items-center justify-center rounded-full bg-zinc-50 py-2 px-4 font-sans font-bold text-zinc-900 shadow-zinc-500 duration-300 hover:bg-zinc-200 hover:shadow-md max-md:mt-4 md:ml-auto"

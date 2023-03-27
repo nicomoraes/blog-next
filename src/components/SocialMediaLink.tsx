@@ -1,7 +1,9 @@
 'use client';
-import { SocialMedia } from '@/models/social_media';
+
 import Image from 'next/image';
 import React, { useRef } from 'react';
+
+import type { SocialMedia } from '@/models/social_media';
 
 interface ISocialMediaLinkProps extends SocialMedia {
   showName?: boolean;
@@ -39,7 +41,7 @@ const SocialMediaLink: React.FC<ISocialMediaLinkProps> = ({
         handleSpanClick('Copiado');
       })
       .catch((error) => {
-        handleSpanClick('Erro ao copiar texto ' + error);
+        handleSpanClick(`Erro ao copiar texto ${error}`);
       });
   }
 
@@ -68,9 +70,7 @@ const SocialMediaLink: React.FC<ISocialMediaLinkProps> = ({
         {showName && (
           <span
             className={`${
-              textStyle
-                ? textStyle
-                : 'font-sans text-zinc-50 hover:text-zinc-500'
+              textStyle || 'font-sans text-zinc-50 hover:text-zinc-500'
             }`}
           >
             {name}

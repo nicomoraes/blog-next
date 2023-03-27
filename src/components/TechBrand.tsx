@@ -1,5 +1,6 @@
-import { Technology } from '@/models/technology';
 import Image from 'next/image';
+
+import type { Technology } from '@/models/technology';
 
 interface IProps {
   techs: Technology[];

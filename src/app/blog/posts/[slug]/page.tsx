@@ -1,3 +1,13 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'highlight.js/styles/github-dark.css';
+
+import type { Metadata } from 'next';
+import { use } from 'react';
+import Markdown from 'react-markdown';
+import rehypeHighlight from 'rehype-highlight';
+import rehypeRaw from 'rehype-raw';
+import remarkGfm from 'remark-gfm';
+
 import { getData } from '@/lib/datocms/get_data';
 import { formatDate } from '@/lib/formatDate';
 import type {
@@ -8,13 +18,6 @@ import {
   POSTPAGE_QUERY,
   STATIC_GEN_POSTPAGE_QUERY,
 } from '@/queries/postpage_query';
-import 'highlight.js/styles/github-dark.css';
-import type { Metadata } from 'next';
-import { use } from 'react';
-import Markdown from 'react-markdown';
-import rehypeHighlight from 'rehype-highlight';
-import rehypeRaw from 'rehype-raw';
-import remarkGfm from 'remark-gfm';
 
 interface IPostPageProps {
   params: { slug: string };
@@ -23,13 +26,14 @@ interface IPostPageProps {
 export default function Posts({ params }: IPostPageProps) {
   const { slug } = params;
 
-  //Faz busca cacheada para cada post
+  // Faz busca cacheada para cada post
   const query: IPostPageQuery = use(
     getData(POSTPAGE_QUERY(slug), { next: { revalidate: 60 * 60 * 24 } })
   );
 
   const {
     data: {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       post: { title, excerpt, body, _createdAt },
     },
   } = query;
@@ -52,11 +56,12 @@ export default function Posts({ params }: IPostPageProps) {
         <div>
           {body && (
             <Markdown
-              children={body}
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw, rehypeHighlight]}
               className="prose prose-zinc md:prose-lg  prose-pre:bg-[#0d1117] prose-pre:shadow-sm prose-pre:shadow-zinc-800 "
-            />
+            >
+              {body}
+            </Markdown>
           )}
         </div>
       </div>
@@ -64,7 +69,7 @@ export default function Posts({ params }: IPostPageProps) {
   );
 }
 
-//Nova forma de utilizar o getStaticPaths com Server Components
+// Nova forma de utilizar o getStaticPaths com Server Components
 export async function generateStaticParams() {
   const posts: IStaticGenParams = await getData(STATIC_GEN_POSTPAGE_QUERY);
   return posts.data.allPosts.map((post) => ({
@@ -72,7 +77,7 @@ export async function generateStaticParams() {
   }));
 }
 
-//Nova forma de carregar as metadatas
+// Nova forma de carregar as metadatas
 export async function generateMetadata({
   params: { slug },
 }: IPostPageProps): Promise<Metadata> {
@@ -85,11 +90,11 @@ export async function generateMetadata({
   } = post;
 
   return {
-    title: title,
+    title,
     description: excerpt,
     keywords: [tag.name],
     openGraph: {
-      title: title,
+      title,
       description: excerpt,
       url: `https://nicolasmoraes.vercel.app/blog/posts/${slug}`,
       siteName: 'Nicolas Moraes',
