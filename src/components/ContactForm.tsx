@@ -97,7 +97,7 @@ export const ContactForm: React.FC<IContactFormProps> = ({
       <h1 className="mb-2 self-center font-serif text-3xl font-bold">
         Contate-me
       </h1>
-      <fieldset className="flex flex-col">
+      <fieldset className="flex flex-col max-sm:mx-2">
         <Input
           label="Nome"
           name="name"
