@@ -44,7 +44,9 @@ export default function Contact() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const metadata: IMetadata = await getData(METADATA_QUERY('contact'));
+  const metadata: IMetadata = await getData(METADATA_QUERY('contact'), {
+    next: { revalidate: 60 * 60 * 24 * 7 },
+  });
 
   const {
     data: {

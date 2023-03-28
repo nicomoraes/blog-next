@@ -28,7 +28,7 @@ export default function Posts({ params }: IPostPageProps) {
 
   // Faz busca cacheada para cada post
   const query: IPostPageQuery = use(
-    getData(POSTPAGE_QUERY(slug), { next: { revalidate: 60 * 60 * 24 } })
+    getData(POSTPAGE_QUERY(slug), { next: { revalidate: 60 * 60 * 12 } })
   );
 
   const {
@@ -71,7 +71,10 @@ export default function Posts({ params }: IPostPageProps) {
 
 // Nova forma de utilizar o getStaticPaths com Server Components
 export async function generateStaticParams() {
-  const posts: IStaticGenParams = await getData(STATIC_GEN_POSTPAGE_QUERY);
+  const posts: IStaticGenParams = await getData(STATIC_GEN_POSTPAGE_QUERY, {
+    next: { revalidate: 60 * 60 * 12 },
+  });
+
   return posts.data.allPosts.map((post) => ({
     slug: post.slug,
   }));
@@ -81,7 +84,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params: { slug },
 }: IPostPageProps): Promise<Metadata> {
-  const post: IPostPageQuery = await getData(POSTPAGE_QUERY(slug));
+  const post: IPostPageQuery = await getData(POSTPAGE_QUERY(slug), {
+    next: { revalidate: 60 * 60 * 24 * 7 },
+  });
 
   const {
     data: {

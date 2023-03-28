@@ -10,7 +10,7 @@ import { METADATA_QUERY } from '@/queries/metadata_query';
 
 export default function Blog() {
   const query: IBlogPageQuery = use(
-    getData(BLOGPAGE_QUERY, { next: { revalidate: 60 * 60 * 24 } })
+    getData(BLOGPAGE_QUERY, { next: { revalidate: 60 * 60 * 12 } })
   );
   return (
     <main className="mx-2 h-screen max-w-screen-md md:mx-auto">
@@ -25,7 +25,9 @@ export default function Blog() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const metadata: IMetadata = await getData(METADATA_QUERY('blog'));
+  const metadata: IMetadata = await getData(METADATA_QUERY('blog'), {
+    next: { revalidate: 60 * 60 * 24 * 7 },
+  });
 
   const {
     data: {

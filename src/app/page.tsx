@@ -77,12 +77,17 @@ export default function Home() {
           <p className="w-full text-center font-serif font-medium">
             &quot;Alguns projetos que desenvolvi durante os últimos anos visando
             o aprendizado e aprimoramento de novas e modernas tecnologias de
-            programção.&quot;
+            programação.&quot;
           </p>
           <ul className="list-none">
             {query.data.allRepositories.map((repository) => {
               return (
-                <PortfolioAccordion key={repository.id} repo={repository} />
+                <li
+                  key={repository.id}
+                  className={`my-4 max-h-max w-full rounded-xl bg-zinc-800 p-4`}
+                >
+                  <PortfolioAccordion repo={repository} />
+                </li>
               );
             })}
           </ul>
@@ -108,12 +113,19 @@ export default function Home() {
           </p>
           <ul className="flex h-full list-none flex-col justify-between">
             {query.data.allPosts.map((post) => {
-              return <HomePagePostArticle key={post.id} post={post} />;
+              return (
+                <li key={post.id}>
+                  <HomePagePostArticle post={post} />
+                </li>
+              );
             })}
           </ul>
           <Link href="/blog" className="mt-5 self-center">
-            <button className="flex w-max items-center rounded-full bg-zinc-900 py-3 px-28 text-base font-bold text-zinc-50 duration-200 hover:bg-zinc-700">
-              Acessar blog{' '}
+            <button
+              type="button"
+              className="flex w-max items-center rounded-full bg-zinc-900 py-3 px-28 text-base font-bold text-zinc-50 duration-200 hover:bg-zinc-700"
+            >
+              Acessar blog
               <AiOutlineArrowRight className="ml-2 text-zinc-50" size={25} />
             </button>
           </Link>
@@ -124,7 +136,9 @@ export default function Home() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const metadata: IMetadata = await getData(METADATA_QUERY('home'));
+  const metadata: IMetadata = await getData(METADATA_QUERY('home'), {
+    next: { revalidate: 60 * 60 * 24 * 7 },
+  });
 
   const {
     data: {
