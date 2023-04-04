@@ -123,7 +123,7 @@ export default function Home() {
           <Link href="/blog" className="mt-5 self-center">
             <button
               type="button"
-              className="flex w-max items-center rounded-full bg-zinc-900 py-3 px-28 text-base font-bold text-zinc-50 duration-200 hover:bg-zinc-700"
+              className="flex w-max items-center rounded-full bg-zinc-900 py-3 px-28 text-base font-bold text-zinc-50 duration-200 hover:bg-zinc-700 max-sm:mx-2"
             >
               Acessar blog
               <AiOutlineArrowRight className="ml-2 text-zinc-50" size={25} />
